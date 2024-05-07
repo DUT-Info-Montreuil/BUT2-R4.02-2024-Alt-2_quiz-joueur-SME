@@ -1,0 +1,1 @@
+test des différentes exceptions
