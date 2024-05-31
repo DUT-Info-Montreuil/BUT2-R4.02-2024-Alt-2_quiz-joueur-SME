@@ -10,7 +10,7 @@ import org.univ_paris8.iut.montreuil.qdev.tp2024.gr2.quiz.utils.exceptions.Pseud
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
+//TODO : Je mets en TODO les changements que j'ai fait
 public class ServiceJoueurImpl implements IServiceJoueur {
 
     private List<JoueurDTO> lesJoueurs = new ArrayList<>();
@@ -32,12 +32,17 @@ public class ServiceJoueurImpl implements IServiceJoueur {
 
     //MÉTHODES
     @Override
-    public void ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee) throws ParametresCreationJoueurException, PseudoExistantException {
-        ajouterJoueur(prenom, pseudo, dateNaissance, languePreferee, new ArrayList<>());
+    //TODO : J'ai changé la signature et ajouter le return
+    //public void ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee) throws ParametresCreationJoueurException, PseudoExistantException {
+    public JoueurDTO ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee) throws ParametresCreationJoueurException, PseudoExistantException {
+        //ajouterJoueur(prenom, pseudo, dateNaissance, languePreferee, new ArrayList<>());
+        return ajouterJoueur(prenom, pseudo, dateNaissance, languePreferee, new ArrayList<>());
     }
 
     @Override
-    public void ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee, List<String> centreInterets) throws ParametresCreationJoueurException, PseudoExistantException {
+    //TODO : J'ai changé la signature et ajouter le return
+    //public void ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee, List<String> centreInterets) throws ParametresCreationJoueurException, PseudoExistantException {
+    public JoueurDTO ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee, List<String> centreInterets) throws ParametresCreationJoueurException, PseudoExistantException {
         // Vérification des paramètres
         validerParametres(prenom, pseudo, dateNaissance, centreInterets);
         // Vérification de la contrainte du pseudo unique
@@ -47,6 +52,7 @@ public class ServiceJoueurImpl implements IServiceJoueur {
         // Ajout du joueur
         JoueurDTO nouveauJoueur = new JoueurDTO(prenom, pseudo, dateNaissance, centreInterets, languePreferee, new ArrayList<ScoreDTO>());
         lesJoueurs.add(nouveauJoueur);
+        return nouveauJoueur;
     }
 
 
