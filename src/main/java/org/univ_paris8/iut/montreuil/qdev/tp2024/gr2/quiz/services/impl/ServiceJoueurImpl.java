@@ -15,10 +15,10 @@ public class ServiceJoueurImpl implements IServiceJoueur {
 
     private List<JoueurDTO> lesJoueurs = new ArrayList<>();
 
-    //variable static pour contrôler l'unicité
+    //Variable static pour contrôler l'unicité
     private static ServiceJoueurImpl uniqueInstance;
 
-    //constructeur private pour initialiser les attributs de la classe
+    //Constructeur private pour initialiser les attributs de la classe
     private ServiceJoueurImpl() {}
 
     // Methode pour créer l'unique instance du Service Joueur
@@ -32,16 +32,11 @@ public class ServiceJoueurImpl implements IServiceJoueur {
 
     //MÉTHODES
     @Override
-    //TODO : J'ai changé la signature et ajouter le return
-    //public void ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee) throws ParametresCreationJoueurException, PseudoExistantException {
     public JoueurDTO ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee) throws ParametresCreationJoueurException, PseudoExistantException {
-        //ajouterJoueur(prenom, pseudo, dateNaissance, languePreferee, new ArrayList<>());
         return ajouterJoueur(prenom, pseudo, dateNaissance, languePreferee, new ArrayList<>());
     }
 
     @Override
-    //TODO : J'ai changé la signature et ajouter le return
-    //public void ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee, List<String> centreInterets) throws ParametresCreationJoueurException, PseudoExistantException {
     public JoueurDTO ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee, List<String> centreInterets) throws ParametresCreationJoueurException, PseudoExistantException {
         // Vérification des paramètres
         validerParametres(prenom, pseudo, dateNaissance, centreInterets);
@@ -55,14 +50,13 @@ public class ServiceJoueurImpl implements IServiceJoueur {
         return nouveauJoueur;
     }
 
-
     //MÉTHODES PRIVATE
     private void validerParametres(String prenom, String pseudo, int dateNaissance, List<String> centresInterets) throws ParametresCreationJoueurException {
-        if (prenom == null || prenom.length() < 2 || !prenom.matches("[a-zA-Z-'À-ÖØ-öø-ÿ]+")) {
+        if (prenom == null || prenom.length() < 2 || !prenom.matches("[a-zA-ZáÁàÀâÂäÄçÇéÉèÈêÊëËóÓòÒôÔöÖúÚùÙûÛüÜíÍìÌîÎïÏýÝÿŸñÑẞßæÆœŒ'\\-]+")) {
             throw new ParametresCreationJoueurException("Prénom invalide : doit avoir au moins 2 caractères et ne contenir que des lettres, des tirets ou des apostrophes.");
         }
 
-        if (pseudo == null || pseudo.length() < 2 || !pseudo.matches("[a-zA-Z0-9-_]+")) {
+        if (pseudo == null || pseudo.length() < 2 || !pseudo.matches("[a-zA-Z0-9áÁàÀâÂäÄçÇéÉèÈêÊëËóÓòÒôÔöÖúÚùÙûÛüÜíÍìÌîÎïÏýÝÿŸñÑẞßæÆœŒ\\-_]+")) {
             throw new ParametresCreationJoueurException("Pseudo invalide : doit avoir au moins 2 caractères et ne contenir que des lettres, des chiffres, des tirets ou des underscores.");
         }
 
@@ -72,7 +66,7 @@ public class ServiceJoueurImpl implements IServiceJoueur {
         }
 
         for (String interet : centresInterets) {
-            if (interet.length() < 2 || !interet.matches("[a-zA-ZÀ-ÖØ-öø-ÿ]+")) {
+            if (interet == null || interet.length() < 2 || !interet.matches("[a-zA-ZáÁàÀâÂäÄçÇéÉèÈêÊëËóÓòÒôÔöÖúÚùÙûÛüÜíÍìÌîÎïÏýÝÿŸñÑẞßæÆœŒ'\\-]+")) {
                 throw new ParametresCreationJoueurException("Centre d'intérêt invalide : chaque intérêt doit avoir au moins 2 caractères et ne contenir que des lettres des cinq alphabets définis.");
             }
         }
@@ -87,7 +81,6 @@ public class ServiceJoueurImpl implements IServiceJoueur {
         }
         return false;
     }
-
 
     //GETTERS & SETTERS
     public List<JoueurDTO> getLesJoueurs() {
