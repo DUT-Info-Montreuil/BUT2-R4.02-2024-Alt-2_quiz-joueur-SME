@@ -35,7 +35,7 @@ public class ServiceJoueurImplTests {
     @BeforeEach
     public void setUp() {
         //À décommenter - Mock
-        //serviceJoueur = ServiceJoueurImpl.getUniqueInstance();
+        serviceJoueur = ServiceJoueurImpl.getUniqueInstance();
     }
 
     @AfterEach
@@ -46,7 +46,7 @@ public class ServiceJoueurImplTests {
     @Test
     public void testAjoutJoueurCasReussi() {
         //Mock
-        serviceJoueur = new ServiceJoueurtestCasReussiMOCK();
+        //serviceJoueur = new ServiceJoueurtestCasReussiMOCK();
 
         JoueurDTO joueur = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
                         prenomValide,
@@ -66,12 +66,13 @@ public class ServiceJoueurImplTests {
             i++;
         }
         assertEquals(0, joueur.getLesScores().size());
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueur));
     }
 
     @Test
     public void testAjoutJoueurCasPrenomValide() {
         //Mock
-        serviceJoueur = new ServiceJoueurtestCasReussiMOCK();
+        //serviceJoueur = new ServiceJoueurtestCasReussiMOCK();
 
         JoueurDTO joueurPrenomDeuxLettres = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
                 "Ao",
@@ -133,7 +134,7 @@ public class ServiceJoueurImplTests {
     @Test
     public void testAjoutJoueurCasPseudoValide() {
         //Mock
-        serviceJoueur = new ServiceJoueurtestCasReussiMOCK();
+        //serviceJoueur = new ServiceJoueurtestCasReussiMOCK();
 
         JoueurDTO joueurPseudoDeuxCaracteres = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
                 prenomValide,
@@ -166,7 +167,7 @@ public class ServiceJoueurImplTests {
     @Test
     public void testAjoutJoueurCasAnneeValide() {
         //Mock
-        serviceJoueur = new ServiceJoueurtestCasReussiMOCK();
+        //serviceJoueur = new ServiceJoueurtestCasReussiMOCK();
 
         JoueurDTO joueurAnneeEnCours = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
                 prenomValide,
@@ -180,7 +181,7 @@ public class ServiceJoueurImplTests {
     @Test
     public void testAjoutJoueurCasInteretsValide() {
         //Mock
-        serviceJoueur = new ServiceJoueurtestCasReussiMOCK();
+        //serviceJoueur = new ServiceJoueurtestCasReussiMOCK();
 
         List<String> interetAvecVide = new ArrayList<>();
         JoueurDTO joueurInteretVide = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
@@ -207,7 +208,7 @@ public class ServiceJoueurImplTests {
     @Test
     public void testAjoutJoueurCasInvalidePseudoExistant() {
         //Mock
-        serviceJoueur = new ServiceJoueurtestCasExceptionPseudoExistantMOCK();
+        //serviceJoueur = new ServiceJoueurtestCasExceptionPseudoExistantMOCK();
 
         assertDoesNotThrow(() -> {
             serviceJoueur.ajouterJoueur(prenomValide, "toto12", anneeValide, langueValide, interetsValide);
@@ -221,7 +222,7 @@ public class ServiceJoueurImplTests {
     @Test
     public void testAjoutJoueurCasPseudoCaseSensible() {
         //Mock
-        serviceJoueur = new ServiceJoueurtestCasExceptionPseudoExistantMOCK();
+        //serviceJoueur = new ServiceJoueurtestCasExceptionPseudoExistantMOCK();
 
         assertDoesNotThrow(() -> {
             serviceJoueur.ajouterJoueur(prenomValide, "toto12", anneeValide, langueValide, interetsValide);
@@ -236,7 +237,7 @@ public class ServiceJoueurImplTests {
     @Test
     public void testAjoutJoueurCasPrenomInvalide() {
         //Mock
-        serviceJoueur = new ServiceJoueurtestCasExceptionPrenomMOCK();
+        //serviceJoueur = new ServiceJoueurtestCasExceptionPrenomMOCK();
 
         assertThrows(PrenomInvalideException.class, () -> serviceJoueur.ajouterJoueur(
                         "",
@@ -272,7 +273,7 @@ public class ServiceJoueurImplTests {
     @Test
     public void testAjoutJoueurCasPseudoInvalide() {
         //Mock
-        serviceJoueur = new ServiceJoueurtestCasExceptionPseudoInvalideMOCK();
+        //serviceJoueur = new ServiceJoueurtestCasExceptionPseudoInvalideMOCK();
 
         assertThrows(PseudoInvalideException.class, () -> serviceJoueur.ajouterJoueur(
                 prenomValide,
@@ -306,7 +307,7 @@ public class ServiceJoueurImplTests {
     @Test
     public void testAjoutJoueurCasDateInvalide() {
         //Mock
-        serviceJoueur = new ServiceJoueurtestCasExceptionNaissanceMOCK();
+        //serviceJoueur = new ServiceJoueurtestCasExceptionNaissanceMOCK();
 
         assertThrows(AnneeDeNaissanceException.class, () -> serviceJoueur.ajouterJoueur(
                 prenomValide,
@@ -333,7 +334,7 @@ public class ServiceJoueurImplTests {
     @Test
     public void testAjoutJoueurCasCentreInteretsInvalide() {
         //Mock
-        serviceJoueur = new ServiceJoueurtestCasExceptionInteretsMOCK();
+        //serviceJoueur = new ServiceJoueurtestCasExceptionInteretsMOCK();
 
         List<String> interetAvecTailleInvalide = new ArrayList<>();
         interetAvecTailleInvalide.add("football");

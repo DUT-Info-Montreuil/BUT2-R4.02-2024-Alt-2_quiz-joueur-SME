@@ -56,7 +56,7 @@ public class ServiceJoueurImpl implements IServiceJoueur {
             throw new ParametresCreationJoueurException("Prénom invalide : doit avoir au moins 2 caractères et ne contenir que des lettres, des tirets ou des apostrophes.");
         }
 
-        if (pseudo == null || pseudo.length() < 2 || !pseudo.matches("[a-zA-Z0-9áÁàÀâÂäÄçÇéÉèÈêÊëËóÓòÒôÔöÖúÚùÙûÛüÜíÍìÌîÎïÏýÝÿŸñÑẞßæÆœŒ\\-_]+")) {
+        if (pseudo == null || pseudo.length() < 2 || !pseudo.matches("[a-zA-Z0-9\\-_]+")) {
             throw new ParametresCreationJoueurException("Pseudo invalide : doit avoir au moins 2 caractères et ne contenir que des lettres, des chiffres, des tirets ou des underscores.");
         }
 

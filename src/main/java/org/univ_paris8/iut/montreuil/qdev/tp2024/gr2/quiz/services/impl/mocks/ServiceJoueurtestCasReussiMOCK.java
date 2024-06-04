@@ -17,8 +17,6 @@ public class ServiceJoueurtestCasReussiMOCK implements IServiceJoueur {
         this.lesJoueurs = new ArrayList<>();
     }
 
-    public
-
     @Override
     public JoueurDTO ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee) throws ParametresCreationJoueurException, PseudoExistantException {
         List<String> centreInterets;
