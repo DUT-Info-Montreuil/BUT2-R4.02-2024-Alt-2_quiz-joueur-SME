@@ -12,9 +12,11 @@ import java.util.List;
 
 public class ServiceJoueurtestCasExceptionPseudoExistantMOCK implements IServiceJoueur {
     private List<String> listePseudo;
+    private List<JoueurDTO> lesJoueurs;
 
     public ServiceJoueurtestCasExceptionPseudoExistantMOCK() {
         this.listePseudo = new ArrayList<>();
+        lesJoueurs = new ArrayList<>();
     }
 
     @Override
@@ -31,7 +33,14 @@ public class ServiceJoueurtestCasExceptionPseudoExistantMOCK implements IService
         } else {
             listePseudo.add(pseudo);
             List<ScoreDTO> scores = new ArrayList<>();
-            return new JoueurDTO(prenom, pseudo, dateNaissance, centreInterets, languePreferee, scores);
+            JoueurDTO joueurDTO = new JoueurDTO(prenom, pseudo, dateNaissance, centreInterets, languePreferee, scores);
+            lesJoueurs.add(joueurDTO);
+            return joueurDTO;
         }
+    }
+
+    @Override
+    public List<JoueurDTO> getLesJoueurs() {
+        return lesJoueurs;
     }
 }

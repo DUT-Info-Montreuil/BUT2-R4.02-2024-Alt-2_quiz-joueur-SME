@@ -7,6 +7,7 @@ import org.univ_paris8.iut.montreuil.qdev.tp2024.gr2.quiz.utils.exceptions.Centr
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr2.quiz.utils.exceptions.ParametresCreationJoueurException;
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr2.quiz.utils.exceptions.PseudoExistantException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceJoueurtestCasExceptionInteretsMOCK implements IServiceJoueur {
@@ -18,5 +19,10 @@ public class ServiceJoueurtestCasExceptionInteretsMOCK implements IServiceJoueur
     @Override
     public JoueurDTO ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee, List<String> centreInterets) throws ParametresCreationJoueurException, PseudoExistantException {
         throw new CentresInteretsInvalidesException();
+    }
+
+    @Override
+    public List<JoueurDTO> getLesJoueurs() {
+        return new ArrayList<>();
     }
 }

@@ -11,10 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceJoueurtestCasReussiMOCK implements IServiceJoueur {
-    //TODO : to be removed (only used to be familiar with exercice)
-    public static ServiceJoueurtestCasReussiMOCK getUniqueInstance() {
-        return null;
+    private List<JoueurDTO> lesJoueurs;
+
+    public ServiceJoueurtestCasReussiMOCK() {
+        this.lesJoueurs = new ArrayList<>();
     }
+
+    public
 
     @Override
     public JoueurDTO ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee) throws ParametresCreationJoueurException, PseudoExistantException {
@@ -26,6 +29,13 @@ public class ServiceJoueurtestCasReussiMOCK implements IServiceJoueur {
     @Override
     public JoueurDTO ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee, List<String> centreInterets) throws ParametresCreationJoueurException, PseudoExistantException {
         List<ScoreDTO> scores = new ArrayList<>();
-        return new JoueurDTO(prenom, pseudo, dateNaissance, centreInterets, languePreferee, scores);
+        JoueurDTO joueurDTO = new JoueurDTO(prenom, pseudo, dateNaissance, centreInterets, languePreferee, scores);
+        lesJoueurs.add(joueurDTO);
+        return joueurDTO;
+    }
+
+    @Override
+    public List<JoueurDTO> getLesJoueurs() {
+        return lesJoueurs;
     }
 }
