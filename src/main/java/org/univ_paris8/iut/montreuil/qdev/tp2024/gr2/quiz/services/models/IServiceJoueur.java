@@ -14,4 +14,6 @@ public interface IServiceJoueur {
 
     //ajouter un joueur avec les centres d’intérêts
     JoueurDTO ajouterJoueur(String prenom, String pseudo, int dateNaissance, LangueEnum languePreferee, List<String> centreInterets) throws ParametresCreationJoueurException, PseudoExistantException;
+
+    List<JoueurDTO> getLesJoueurs();
 }
