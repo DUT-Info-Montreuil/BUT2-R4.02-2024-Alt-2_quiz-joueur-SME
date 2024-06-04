@@ -36,6 +36,7 @@ public class ServiceJoueurImplTests {
     public void setUp() {
         //À décommenter - Mock
         serviceJoueur = ServiceJoueurImpl.getUniqueInstance();
+        serviceJoueur.getLesJoueurs().clear();
     }
 
     @AfterEach
