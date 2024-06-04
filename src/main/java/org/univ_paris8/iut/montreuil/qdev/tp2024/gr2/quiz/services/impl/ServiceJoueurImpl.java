@@ -4,8 +4,7 @@ import org.univ_paris8.iut.montreuil.qdev.tp2024.gr2.quiz.entities.dto.JoueurDTO
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr2.quiz.entities.dto.ScoreDTO;
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr2.quiz.entities.enums.LangueEnum;
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr2.quiz.services.models.IServiceJoueur;
-import org.univ_paris8.iut.montreuil.qdev.tp2024.gr2.quiz.utils.exceptions.ParametresCreationJoueurException;
-import org.univ_paris8.iut.montreuil.qdev.tp2024.gr2.quiz.utils.exceptions.PseudoExistantException;
+import org.univ_paris8.iut.montreuil.qdev.tp2024.gr2.quiz.utils.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,21 +52,21 @@ public class ServiceJoueurImpl implements IServiceJoueur {
     //MÉTHODES PRIVATE
     private void validerParametres(String prenom, String pseudo, int dateNaissance, List<String> centresInterets) throws ParametresCreationJoueurException {
         if (prenom == null || prenom.length() < 2 || !prenom.matches("[a-zA-ZáÁàÀâÂäÄçÇéÉèÈêÊëËóÓòÒôÔöÖúÚùÙûÛüÜíÍìÌîÎïÏýÝÿŸñÑẞßæÆœŒ'\\-]+")) {
-            throw new ParametresCreationJoueurException("Prénom invalide : doit avoir au moins 2 caractères et ne contenir que des lettres, des tirets ou des apostrophes.");
+            throw new PrenomInvalideException("Prénom invalide : doit avoir au moins 2 caractères et ne contenir que des lettres, des tirets ou des apostrophes.");
         }
 
         if (pseudo == null || pseudo.length() < 2 || !pseudo.matches("[a-zA-Z0-9\\-_]+")) {
-            throw new ParametresCreationJoueurException("Pseudo invalide : doit avoir au moins 2 caractères et ne contenir que des lettres, des chiffres, des tirets ou des underscores.");
+            throw new PseudoInvalideException("Pseudo invalide : doit avoir au moins 2 caractères et ne contenir que des lettres, des chiffres, des tirets ou des underscores.");
         }
 
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        if (dateNaissance < 1907 || dateNaissance > currentYear) {
-            throw new ParametresCreationJoueurException("Date de naissance invalide : doit être entre 1907 et l'année actuelle.");
+        if (dateNaissance <= 1907 || dateNaissance > currentYear) {
+            throw new AnneeDeNaissanceException("Date de naissance invalide : doit être entre 1907 et l'année actuelle.");
         }
 
         for (String interet : centresInterets) {
             if (interet == null || interet.length() < 2 || !interet.matches("[a-zA-ZáÁàÀâÂäÄçÇéÉèÈêÊëËóÓòÒôÔöÖúÚùÙûÛüÜíÍìÌîÎïÏýÝÿŸñÑẞßæÆœŒ'\\-]+")) {
-                throw new ParametresCreationJoueurException("Centre d'intérêt invalide : chaque intérêt doit avoir au moins 2 caractères et ne contenir que des lettres des cinq alphabets définis.");
+                throw new CentresInteretsInvalidesException("Centre d'intérêt invalide : chaque intérêt doit avoir au moins 2 caractères et ne contenir que des lettres des cinq alphabets définis.");
             }
         }
 

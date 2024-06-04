@@ -82,6 +82,7 @@ public class ServiceJoueurImplTests {
                 langueValide,
                 interetsValide));
         assertEquals("Ao", joueurPrenomDeuxLettres.getPrenom());
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurPrenomDeuxLettres));
 
         JoueurDTO joueurPrenomLettreFra = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
                 "François",
@@ -90,6 +91,7 @@ public class ServiceJoueurImplTests {
                 langueValide,
                 interetsValide));
         assertEquals("François", joueurPrenomLettreFra.getPrenom());
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurPrenomLettreFra));
 
         JoueurDTO joueurPrenomLettreEng = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
                 "emily",
@@ -98,6 +100,7 @@ public class ServiceJoueurImplTests {
                 langueValide,
                 interetsValide));
         assertEquals("emily", joueurPrenomLettreEng.getPrenom());
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurPrenomLettreEng));
 
         JoueurDTO joueurPrenomLettreAllemand = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
                 "Kißlägg",
@@ -106,6 +109,7 @@ public class ServiceJoueurImplTests {
                 langueValide,
                 interetsValide));
         assertEquals("Kißlägg", joueurPrenomLettreAllemand.getPrenom());
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurPrenomLettreAllemand));
 
         JoueurDTO joueurPrenomLettreItalien = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
                 "Iacopó",
@@ -114,6 +118,7 @@ public class ServiceJoueurImplTests {
                 langueValide,
                 interetsValide));
         assertEquals("Iacopó", joueurPrenomLettreItalien.getPrenom());
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurPrenomLettreItalien));
 
         JoueurDTO joueurPrenomLettreEspagnol = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
                 "Toño",
@@ -122,6 +127,7 @@ public class ServiceJoueurImplTests {
                 langueValide,
                 interetsValide));
         assertEquals("Toño", joueurPrenomLettreEspagnol.getPrenom());
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurPrenomLettreEspagnol));
 
         JoueurDTO joueurPrenomCompose = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
                 "Jean-Pierre",
@@ -130,6 +136,7 @@ public class ServiceJoueurImplTests {
                 langueValide,
                 interetsValide));
         assertEquals("Jean-Pierre", joueurPrenomCompose.getPrenom());
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurPrenomCompose));
     }
 
     @Test
@@ -144,6 +151,7 @@ public class ServiceJoueurImplTests {
                 langueValide,
                 interetsValide));
         assertEquals("oO", joueurPseudoDeuxCaracteres.getPseudo());
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurPseudoDeuxCaracteres));
 
         JoueurDTO joueurPseudoAvecTiret = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
                 prenomValide,
@@ -152,7 +160,7 @@ public class ServiceJoueurImplTests {
                 langueValide,
                 interetsValide));
         assertEquals("ilo-o", joueurPseudoAvecTiret.getPseudo());
-        ;
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurPseudoAvecTiret));
 
         JoueurDTO joueurPseudoAvecUnderscore = assertDoesNotThrow(() -> serviceJoueur.ajouterJoueur(
                 prenomValide,
@@ -161,7 +169,7 @@ public class ServiceJoueurImplTests {
                 langueValide,
                 interetsValide));
         assertEquals("ilo__t", joueurPseudoAvecUnderscore.getPseudo());
-        ;
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurPseudoAvecUnderscore));
 
     }
 
@@ -177,6 +185,7 @@ public class ServiceJoueurImplTests {
                 langueValide,
                 interetsValide));
         assertEquals(2024, joueurAnneeEnCours.getDateNaissance());
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurAnneeEnCours));
     }
 
     @Test
@@ -192,6 +201,7 @@ public class ServiceJoueurImplTests {
                 langueValide,
                 interetAvecVide));
         assertEquals(0, joueurInteretVide.getCentresInterets().size());
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurInteretVide));
 
         List<String> interetDeuxLettres = new ArrayList<>();
         interetDeuxLettres.add("football");
@@ -204,6 +214,7 @@ public class ServiceJoueurImplTests {
                 interetDeuxLettres));
         assertEquals("football", joueurInteretDeuxLettres.getCentresInterets().get(0));
         assertEquals("Ao", joueurInteretDeuxLettres.getCentresInterets().get(1));
+        assertTrue(serviceJoueur.getLesJoueurs().contains(joueurInteretDeuxLettres));
     }
 
     @Test
@@ -229,9 +240,12 @@ public class ServiceJoueurImplTests {
             serviceJoueur.ajouterJoueur(prenomValide, "toto12", anneeValide, langueValide, interetsValide);
         }, "Le pseudo est censé ne pas exister");
 
+        /*
         assertDoesNotThrow(() -> {
             serviceJoueur.ajouterJoueur(prenomValide, "TOTO12", anneeValide, langueValide, interetsValide);
         }, "Le pseudo est censé être accepté");
+         */
+        assertThrows(PseudoExistantException.class, () -> serviceJoueur.ajouterJoueur(prenomValide, "TOTO12", anneeValide, langueValide, interetsValide));
 
     }
 
